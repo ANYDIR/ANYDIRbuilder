@@ -2,14 +2,27 @@ import markdown2
 from slugify import slugify
 import os
 
+from argparse import ArgumentParser
+parser = ArgumentParser()
+parser.add_argument("-i", "--input", dest="input", default="input",
+                    help="Folder to use as the input")
+parser.add_argument("-o", "--output", dest="output", default="output",
+                    help="Folder to use as the output")
+parser.add_argument("-repo", "--repourl", dest="repo", default="https://github.com/anydir/anydir.github.io/blob/wiki/",
+                    help="URL to use for repos")
+parser.add_argument("-crumbs", "--crumburl", dest="link", default="https://anydir.github.io/",
+                    help="URL to use for crumbs and page links")
+
+args = parser.parse_args()
+
 config = {
     "titleprefix": "ANYDIR - ",
-    "linkprefix": "https://github.com/LavenderTheGreat/DJHWikiTesting/blob/master/",
-    "crumbprefix":"https://LavenderTheGreat.github.io/DJHWikiTesting/", # for the crumb links,
+    "linkprefix": args.repo,
+    "crumbprefix": args.link, # for the crumb links,
     "contentsformat": "\n<br>\n<a href=\"#{}\"><div class=\"djh-item{}\">{}</div></a>", # first is the slug link, second is how many sublevels, third is what the title is
     "breadcrumb": " <div class=\"breadcrumb\">></div> ",
-    "inputfolder": "DJHWiki",
-    "outputfolder": "EXPORT - DJHWiki",
+    "inputfolder": args.input,
+    "outputfolder": args.output,
     "bottomlevelfancy": "Index"
 }
 
@@ -107,15 +120,15 @@ for subdir, dirs, files in os.walk(config["inputfolder"]):
                     breadcrumbs += "<a href=\"{crumbprefix}{link}\">{foldername}</a>".format(crumbprefix = config["crumbprefix"], link = "/".join(tempfilepath[1:(index + 1)]).lower(), foldername = fancycrumb)
 
         print(pagetitle)
-
+        print("filepath: " + filepath)
         # Write to a file
         print("Indexname: {}".format(filepath[-8:]))
 
         if filepath[-8:].lower() == "index.md":
             print("This is an index file...")
-            outputfilename = "{outputfolder}/{filepath}{extension}".format(outputfolder = config["outputfolder"], filepath = filepath[:-3],extension = ".html").lower()
+            outputfilename = "{outputfolder}/{filepath}{extension}".format(outputfolder = config["outputfolder"], filepath = filepath[len(args.input) + 1:-3],extension = ".html").lower()
         else:
-            outputfilename = "{outputfolder}/{filepath}/index{extension}".format(outputfolder = config["outputfolder"], filepath = filepath[:-3],extension = ".html").lower()
+            outputfilename = "{outputfolder}/{filepath}/index{extension}".format(outputfolder = config["outputfolder"], filepath = filepath[len(args.input) + 1:-3],extension = ".html").lower()
 
 
         print("Checking if {directory} exists...".format(directory = os.path.dirname(outputfilename)))
