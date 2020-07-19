@@ -1,4 +1,4 @@
-# ⇄ANYDIR Builder
+# ⇌ANYDIR Builder
 
 ANYDIR builder, or simply just ANYDIR, is a tool to generate sites in a similar fashion to documentation generators or the Osu wiki. It takes in a bunch of markdown files and throws them out as nicely formatted HTML files ready to be uploaded as a static website.
 
