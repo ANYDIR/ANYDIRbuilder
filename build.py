@@ -151,7 +151,7 @@ for subdir, dirs, files in os.walk(config["inputfolder"]):
                     htmlpagetitle = pagetitle, 
                     githubpath = config["crumbprefix"], 
                     pagebreadcrumbs = breadcrumbs, 
-                    githublinktopage = "{}{}".format(config["linkprefix"], filepath:[len(args.input) + 1:]), 
+                    githublinktopage = "{}{}".format(config["linkprefix"], filepath[len(args.input) + 1:]), 
                     sidebar = contents, 
                     mainpage = pagecontent
                 ))
