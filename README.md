@@ -12,7 +12,7 @@ ANYDIR's build script requires the following:
 
 ANYDIR by default looks in a subdirectory called ``Index`` for MD files, MD files can be called anything but to preserve compatibility it's recommended to call md files ``index.md``.
 
-Run ANYDIR in your terminal of choice with Python and you should eventually get a directory outputted at ``Export/Index`` which is ready to be uploaded as a static site.
+Run ANYDIR in your terminal of choice with Python and you should eventually get a directory outputted at ``output/`` which is ready to be uploaded as a static site.
 
 ## ANYDIR format
 
@@ -34,6 +34,10 @@ ANYDIR has somewhat limited customisability. These can be found at the top of th
 - Bread crumb - HTML for the breadcrumb icon.
 - Input folder - Folder from which the root crumb is named and from which MD files are pulled.
 - Output folder - Where files are outputted to.
+
+## Notes
+
+⇌ANYDIR builder **is extremely quick and dirty**. It was made to serve a purpose of which it does. Current issues include ``./`` breaking the input path.
 
 ## Current ANYDIR projects
 
